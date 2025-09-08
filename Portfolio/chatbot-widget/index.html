@@ -1,0 +1,64 @@
+  <!-- Chatbot Widget -->
+<div id="chatbot">
+  <div id="chat-header">💬 Chat with Sonya's Portfolio</div>
+  <div id="chat-box"></div>
+  <input type="text" id="chat-input" placeholder="Ask me something..." />
+</div>
+
+<script>
+  const chatBox = document.getElementById('chat-box');
+  const chatInput = document.getElementById('chat-input');
+  const chatbot = document.getElementById('chatbot')
+
+  const responses = {
+    hello: "👋 Hey there! I’m Sonya’s portfolio assistant. Ask me about her skills, projects, references or how to contact her.",
+    projects: "Sonya has built responsive apps, API integrations, and custom WordPress solutions.",
+    skills: "She works with JavaScript, Vue.js, WordPress, and more—always learning new tools!",
+    contact: "You can reach Sonya at sonya.williams1203@gmail.com 📧",
+    references: "Yes! Sonya has references from Marvin Chau, Senior Software Developer at Glasshive who was her direct manager and from Bill Wettingfeld, the President of Glasshive. Which would you like to see?",
+    "marvin chau, marvin, chau, manager": "Sonya Williams was an integral member of the Glasshive development team, where we built the foundation of a rapidly growing department. Whatever challenge we presented to her, Sonya consistently stepped up, adapted, and delivered. She contributed to major initiatives such as implementing dark mode in our app, building our marketing site, rolling out quality-of-life improvements, and ensuring every support ticket was fielded, resolved, and tested thoroughly. What stood out most was her ability to juggle multiple responsibilities at once while continuously developing her skills. Sonya brings not only technical ability but also a positive attitude and energy that elevates any team. I have no doubt she will be a tremendous asset wherever she goes.",
+    "bill wettingfeld": "I am pleased to recommend Sonya Williams, who has worked as a Junior Engineer at GlassHive. Sonya has been a valuable member of our team, known for her positive, bubbly attitude, strong work ethic, and eagerness to learn.In her role, Sonya supported the engineering team by monitoring and triaging support tickets, ensuring timely responses to customer issues. She also contributed to product development, helping deliver features such as dark mode for the app, redesigns to many frontend components, multiple navigation updates, and countless bugfixes. Her attention to detail and reliability made her a trusted resource across both support and engineering initiatives.Sonya is proactive, quick to take on new challenges, and has demonstrated steady growth in her technical skills, particularly in HTML, CSS, JavaScript and Vue.js. She has successfully managed projects with significant scope for her position, showing the ability to organize work, communicate effectively, and deliver results.Beyond her technical contributions, Sonya brings a positive, team-oriented presence that makes her a pleasure to work with. She consistently goes above and beyond and her willingness to step up wherever needed make her an invaluable teammate.I am confident that Sonya will be a wonderful addition to another team. She has already proven herself to be capable, hardworking, and dedicated, and I have no doubt that she will thrive in any environment where she is given the opportunity to contribute."
+  };
+
+  // function addMessage(sender, text) {
+  //   const msg = document.createElement('div');
+  //   msg.textContent = `${sender}: ${text}`;
+  //   chatBox.appendChild(msg);
+  //   chatBox.scrollTop = chatBox.scrollHeight;
+  // }
+function addMessage(sender, text) {
+  const msg = document.createElement('div');
+  msg.classList.add('message');
+
+  if (sender === 'You') {
+    msg.classList.add('user');
+  } else {
+    msg.classList.add('bot');
+  }
+
+  msg.textContent = text;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+  chatInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && chatInput.value.trim() !== '') {
+      const input = chatInput.value.toLowerCase();
+      addMessage('You', chatInput.value);
+      chatInput.value = '';
+
+      let reply = "Sorry, I don’t understand that yet. Try asking about projects, skills, references or how to contact.";
+      for (const key in responses) {
+        if (input.includes(key)) {
+          reply = responses[key];
+          break;
+        }
+      }
+      setTimeout(() => addMessage('Bot', reply), 600);
+    }
+  });
+  window.addEventListener('load', () => {
+    chatbot.style.transform = "translateY(0)"; // Slide up animation
+    addMessage('Bot', "👋 Hey there! I’m Sonya’s portfolio assistant. Ask me about her skills, projects, references or how to contact her.");
+  });
+</script>
