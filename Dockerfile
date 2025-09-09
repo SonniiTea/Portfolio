@@ -29,11 +29,13 @@ COPY . .
 
 
 # Final stage for app image
-FROM base
+FROM nginx:alpine
 
 # Copy built application
-COPY --from=build /app /app
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "node", "index.js" ]
+# Expose port 80
+EXPOSE 80
+
+# Start nginx when the container launches
+CMD ["nginx", "-g", "daemon off;"]
