@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://https://sonniitea.com"
+    "url": "git+https://sonniitea.github.io/Portfolio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://https://sonniitea.com"
+    "url": "https://sonniitea.github.io/Portfolio"
   },
-  "homepage": "https://https://sonniitea.com",
+  "homepage": "https://sonniitea.github.io/Portfolio",
   "dependencies": {
     "express": "^5.1.0",
     "vue": "^3.5.21"
