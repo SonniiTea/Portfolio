@@ -1,8 +1,34 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./style.css";
+import { Link } from "react-router-dom";
+import ThemeToggle from "../components/ThemeToggle";
 
-export default function Portfolio() {
-  const [darkMode, setDarkMode] = useState(false);
+const PROJECTS = [
+  {
+    id: "example",
+    title: "Cafe-Style Drink Recipe App",
+    description:
+      "Browse and build cafe-style drink recipes — live demo embedded in the case study page.",
+    to: "/projects/example",
+    thumb:
+      "https://via.placeholder.com/400x160/c4aeb8/3d2c33?text=Drink+recipes",
+  },
+  {
+    id: "2",
+    title: "Project title",
+    description: "Short description of the project. Tech stack used.",
+    to: null,
+    thumb: "https://via.placeholder.com/400x160",
+  },
+  {
+    id: "3",
+    title: "Project title",
+    description: "Short description of the project. Tech stack used.",
+    to: null,
+    thumb: "https://via.placeholder.com/400x160",
+  },
+];
+
+export default function Portfolio({ darkMode, setDarkMode }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [chatOpen, setChatOpen] = useState(true);
@@ -82,47 +108,10 @@ export default function Portfolio() {
   };
 
   return (
-    <div className={`app-root${darkMode ? " dark-mode" : ""}`}>
-      <div className="bg-blobs" aria-hidden="true">
-        <span className="blob blob-a">
-          <span className="blob-fill" />
-        </span>
-        <span className="blob blob-b">
-          <span className="blob-fill" />
-        </span>
-        <span className="blob blob-c">
-          <span className="blob-fill" />
-        </span>
-      </div>
-
-      <main className="page-main">
+    <main className="page-main">
         <header className="hero">
           <div className="hero-inner">
-            <div className="theme-toggle-wrap">
-              <span className="theme-toggle-label" aria-hidden="true">
-                {darkMode ? "Dark" : "Light"}
-              </span>
-              <button
-                type="button"
-                role="switch"
-                aria-checked={darkMode}
-                aria-label={
-                  darkMode ? "Switch to light mode" : "Switch to dark mode"
-                }
-                className="theme-slider"
-                onClick={() => setDarkMode(!darkMode)}
-              >
-                <span className="theme-slider-track">
-                  <span className="theme-slider-face theme-slider-face--sun" aria-hidden>
-                    ☀️
-                  </span>
-                  <span className="theme-slider-face theme-slider-face--moon" aria-hidden>
-                    🌙
-                  </span>
-                  <span className="theme-slider-knob" aria-hidden />
-                </span>
-              </button>
-            </div>
+            <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
             <h1>Sonya Williams</h1>
             <p>
               Front End Software Engineer | Turning clean code into creative
@@ -141,18 +130,33 @@ export default function Portfolio() {
       </section>
 
       <section className="projects">
-        {[1, 2, 3].map((i) => (
-          <div className="project-card" key={i}>
-            <img
-              src="https://via.placeholder.com/400x160"
-              alt="Project Thumbnail"
-            />
-            <div className="content">
-              <h3>Project Title</h3>
-              <p>Short description of the project. Tech stack used.</p>
+        {PROJECTS.map((p) => {
+          const inner = (
+            <>
+              <img src={p.thumb} alt={`${p.title} preview`} />
+              <div className="content">
+                <h3>{p.title}</h3>
+                <p>{p.description}</p>
+                {p.to ? (
+                  <span className="project-card__cta">View project →</span>
+                ) : null}
+              </div>
+            </>
+          );
+          return p.to ? (
+            <Link
+              key={p.id}
+              to={p.to}
+              className="project-card project-card--link"
+            >
+              {inner}
+            </Link>
+          ) : (
+            <div key={p.id} className="project-card">
+              {inner}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </section>
 
       <section className="contact">
@@ -209,7 +213,6 @@ export default function Portfolio() {
           onKeyDown={handleSend}
         />
       </div>
-      </main>
-    </div>
+    </main>
   );
 }
