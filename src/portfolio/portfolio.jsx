@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
+import { getCafeDrinkAppBaseUrl } from "../lib/cafeDrinkAppUrl";
 
 const PROJECTS = [
   {
     id: "example",
     title: "Cafe-Style Drink Recipe App",
     description:
-      "Browse and build cafe-style drink recipes — live demo embedded in the case study page.",
-    to: "/projects/example",
-    thumb:
-      "https://via.placeholder.com/400x160/c4aeb8/3d2c33?text=Drink+recipes",
+      "Browse cafe-style drink recipes — opens the full live app (hosted or local dev).",
+    /** Navigate to cafe-drink-app; not an in-portfolio route */
+    external: true,
+    to: null,
+    thumb: `${process.env.PUBLIC_URL || ""}/images/cafe-vibes-thumb.png`,
   },
   {
     id: "2",
@@ -137,12 +139,23 @@ export default function Portfolio({ darkMode, setDarkMode }) {
               <div className="content">
                 <h3>{p.title}</h3>
                 <p>{p.description}</p>
-                {p.to ? (
+                {p.to || p.external ? (
                   <span className="project-card__cta">View project →</span>
                 ) : null}
               </div>
             </>
           );
+          if (p.external) {
+            return (
+              <a
+                key={p.id}
+                href={getCafeDrinkAppBaseUrl()}
+                className="project-card project-card--link"
+              >
+                {inner}
+              </a>
+            );
+          }
           return p.to ? (
             <Link
               key={p.id}

@@ -286,6 +286,17 @@ app.all('/integrations/:path{.+}', async (c, next) => {
 });
 
 app.use('/api/auth/*', async (c, next) => {
+  // Without AUTH_SECRET, Auth.js is not initialized but the React SessionProvider
+  // still calls /api/auth/*. Returning HTML error pages breaks JSON parsing and hydration.
+  if (!process.env.AUTH_SECRET) {
+    const p = c.req.path;
+    if (c.req.method === 'GET' || c.req.method === 'HEAD') {
+      if (/\/session\/?$/.test(p)) return c.json(null);
+      if (p.includes('/csrf')) return c.json({ csrfToken: '' });
+      if (p.includes('/providers')) return c.json([]);
+    }
+    return c.json({ error: 'Auth is not configured (set AUTH_SECRET for this app).' }, 503);
+  }
   if (isAuthAction(c.req.path)) {
     return authHandler()(c, next);
   }

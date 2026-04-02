@@ -1,22 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
-
-const HOSTED_APP_URL =
-  "https://683fc7a9-93c6-4c45-b973-d7dcff546ded.created.app";
-
-/** Full monorepo web app: run `npm run dev` from cafe-drink-app/apps/web (port 4000). */
-const LOCAL_WEB_APP_ORIGIN = "http://localhost:4000";
+import {
+  CAFE_DRINK_HOSTED_URL,
+  getCafeDrinkIframeSrc,
+} from "../lib/cafeDrinkAppUrl";
 
 const PROJECT_TITLE = "Cafe-Style Drink Recipe App";
 
 function iframeSrc() {
-  const fromEnv = process.env.REACT_APP_CAFE_DRINK_IFRAME_URL;
-  if (fromEnv) return fromEnv.replace(/\/$/, "") + "/";
-  if (process.env.NODE_ENV === "development") {
-    return `${LOCAL_WEB_APP_ORIGIN}/`;
-  }
-  return HOSTED_APP_URL;
+  return getCafeDrinkIframeSrc();
 }
 
 /**
@@ -40,13 +33,16 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
         <p className="example-project__lede">
           Full Vite + React Router app from{" "}
           <code className="example-project__code">cafe-drink-app/apps/web</code>,
-          embedded below. In development it loads{" "}
-          <code className="example-project__code">{LOCAL_WEB_APP_ORIGIN}</code>{" "}
-          — start it with{" "}
+          embedded below. In development the iframe uses{" "}
+          <strong>this page’s hostname</strong> and port{" "}
+          <code className="example-project__code">4000</code>{" "}
+          (so <code className="example-project__code">localhost</code> and{" "}
+          <code className="example-project__code">127.0.0.1</code> stay consistent
+          with Chrome). Start the app with{" "}
           <code className="example-project__code">
             cd cafe-drink-app/apps/web && npm run dev
           </code>
-          . Override the iframe URL anytime with{" "}
+          . Override the URL with{" "}
           <code className="example-project__code">
             REACT_APP_CAFE_DRINK_IFRAME_URL
           </code>{" "}
@@ -61,7 +57,6 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
             className="example-project__iframe"
             title="Cafe Drink App"
             src={src}
-            loading="lazy"
           />
         </div>
       </section>
@@ -74,7 +69,7 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
         </p>
         <p className="example-project__iframe-note">
           <a
-            href={HOSTED_APP_URL}
+            href={CAFE_DRINK_HOSTED_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="example-project__back"
