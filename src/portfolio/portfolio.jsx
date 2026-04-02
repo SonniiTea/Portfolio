@@ -137,7 +137,7 @@ export default function Portfolio({ darkMode, setDarkMode }) {
             <>
               <img src={p.thumb} alt={`${p.title} preview`} />
               <div className="content">
-                <h3>{p.title}</h3>
+                <h3 className="project-card-title">{p.title}</h3>
                 <p>{p.description}</p>
                 {p.to || p.external ? (
                   <span className="project-card__cta">View project →</span>
