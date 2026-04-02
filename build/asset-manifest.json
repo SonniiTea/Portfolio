@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/SonniiTea/Portfolio/static/js/main.19e647ed.js",
-    "index.html": "/SonniiTea/Portfolio/index.html",
-    "main.19e647ed.js.map": "/SonniiTea/Portfolio/static/js/main.19e647ed.js.map"
+    "main.css": "/Portfolio/static/css/main.91a4093c.css",
+    "main.js": "/Portfolio/static/js/main.88b46781.js",
+    "index.html": "/Portfolio/index.html",
+    "main.91a4093c.css.map": "/Portfolio/static/css/main.91a4093c.css.map",
+    "main.88b46781.js.map": "/Portfolio/static/js/main.88b46781.js.map"
   },
   "entrypoints": [
-    "static/js/main.19e647ed.js"
+    "static/css/main.91a4093c.css",
+    "static/js/main.88b46781.js"
   ]
 }

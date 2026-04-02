@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./style.css"; 
+import "./style.css";
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false);
@@ -52,11 +52,11 @@ export default function Portfolio() {
       "Yes! Sonya has references from Marvin Chau (Senior Software Developer at Glasshive) and Bill Wettingfeld (President of Glasshive).",
     "marvin chau":
       "Sonya Williams was an integral member of the Glasshive development team... (full Marvin Chau reference).",
-    "marvin":
+    marvin:
       "Sonya Williams was an integral member of the Glasshive development team... (full Marvin Chau reference).",
     "bill wettingfeld":
       "I am pleased to recommend Sonya Williams... (full Bill Wettingfeld reference).",
-    "bill":
+    bill:
       "Per Bill Wettingfeld, President at Glasshive: I am pleased to recommend Sonya Williams... (full reference).",
   };
 
@@ -82,22 +82,59 @@ export default function Portfolio() {
   };
 
   return (
-    <div className={darkMode ? "dark-mode" : ""}>
-      <header>
-        <button className="toggle-btn" onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? "☀️" : "🌙"}
-        </button>
-        <h1>Sonya Williams</h1>
-        <p>
-          Front End Software Engineer | Turning clean code into creative
-          solutions
-        </p>
-      </header>
+    <div className={`app-root${darkMode ? " dark-mode" : ""}`}>
+      <div className="bg-blobs" aria-hidden="true">
+        <span className="blob blob-a">
+          <span className="blob-fill" />
+        </span>
+        <span className="blob blob-b">
+          <span className="blob-fill" />
+        </span>
+        <span className="blob blob-c">
+          <span className="blob-fill" />
+        </span>
+      </div>
+
+      <main className="page-main">
+        <header className="hero">
+          <div className="hero-inner">
+            <div className="theme-toggle-wrap">
+              <span className="theme-toggle-label" aria-hidden="true">
+                {darkMode ? "Dark" : "Light"}
+              </span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={darkMode}
+                aria-label={
+                  darkMode ? "Switch to light mode" : "Switch to dark mode"
+                }
+                className="theme-slider"
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                <span className="theme-slider-track">
+                  <span className="theme-slider-face theme-slider-face--sun" aria-hidden>
+                    ☀️
+                  </span>
+                  <span className="theme-slider-face theme-slider-face--moon" aria-hidden>
+                    🌙
+                  </span>
+                  <span className="theme-slider-knob" aria-hidden />
+                </span>
+              </button>
+            </div>
+            <h1>Sonya Williams</h1>
+            <p>
+              Front End Software Engineer | Turning clean code into creative
+              solutions
+            </p>
+          </div>
+        </header>
 
       <section className="about">
         <h2>About Me</h2>
         <p>
-          I’m a Junior Software Engineer with a passion for creating intuitive,
+          I’m a Front End Software Engineer with a passion for creating intuitive,
           user-friendly applications. I enjoy problem-solving, learning new
           tools, and working with others to bring ideas to life.
         </p>
@@ -120,7 +157,9 @@ export default function Portfolio() {
 
       <section className="contact">
         <h2>Let’s Build Something Amazing</h2>
-        <a href="mailto:sonya.williams1203@gmail.com">Contact Me</a>
+        <a className="btn-contact" href="mailto:sonya.williams1203@gmail.com">
+          Contact Me
+        </a>
       </section>
 
       {/* Chatbot */}
@@ -134,7 +173,7 @@ export default function Portfolio() {
       >
         <div id="chat-header">
           💬 Chat with Sonya's Portfolio
-          <label className="container">
+          <label className="chat-collapse-btn">
             <input
               type="checkbox"
               checked={chatOpen}
@@ -163,12 +202,14 @@ export default function Portfolio() {
         <input
           type="text"
           id="chat-input"
+          className="chat-input"
           placeholder="Ask me something..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleSend}
         />
       </div>
+      </main>
     </div>
   );
 }
