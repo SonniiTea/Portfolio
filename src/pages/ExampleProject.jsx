@@ -2,23 +2,27 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 import {
-  CAFE_DRINK_HOSTED_URL,
+  getCafeDrinkAppBaseUrl,
   getCafeDrinkIframeSrc,
 } from "../lib/cafeDrinkAppUrl";
 
 const PROJECT_TITLE = "Cafe-Style Drink Recipe App";
 
-function iframeSrc() {
-  return getCafeDrinkIframeSrc();
+/** Dev: iframe to local Vite app. Prod: most hosts block iframes (X-Frame-Options / CSP); open in new tab. */
+function useIframeEmbed() {
+  if (process.env.NODE_ENV === "development") return true;
+  return process.env.REACT_APP_CAFE_DRINK_USE_IFRAME === "true";
 }
 
 /**
  * Case-study page: embeds the full Cafe Drink web app (cafe-drink-app/apps/web)
- * in an iframe. CRA cannot import that app as a component; linking by URL is the
- * supported integration.
+ * in an iframe in development. Production uses a prominent link — typical hosts
+ * (e.g. Vercel) send frame-ancestors 'none', so the embed stays blank on GitHub Pages.
  */
 export default function ExampleProject({ darkMode, setDarkMode }) {
-  const src = iframeSrc();
+  const liveAppUrl = getCafeDrinkAppBaseUrl();
+  const iframeSrc = getCafeDrinkIframeSrc();
+  const showIframe = useIframeEmbed();
 
   return (
     <main className="page-main example-project">
@@ -30,46 +34,80 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
           </Link>
         </nav>
         <h1 className="example-project__title">{PROJECT_TITLE}</h1>
-        <p className="example-project__lede">
-          Full Vite + React Router app from{" "}
-          <code className="example-project__code">cafe-drink-app/apps/web</code>,
-          embedded below. In development the iframe uses{" "}
-          <strong>this page’s hostname</strong> and port{" "}
-          <code className="example-project__code">4000</code>{" "}
-          (so <code className="example-project__code">localhost</code> and{" "}
-          <code className="example-project__code">127.0.0.1</code> stay consistent
-          with Chrome). Start the app with{" "}
-          <code className="example-project__code">
-            cd cafe-drink-app/apps/web && npm run dev
-          </code>
-          . Override the URL with{" "}
-          <code className="example-project__code">
-            REACT_APP_CAFE_DRINK_IFRAME_URL
-          </code>{" "}
-          in <code className="example-project__code">.env.local</code>.
-        </p>
+        {process.env.NODE_ENV === "development" ? (
+          <p className="example-project__lede">
+            Full Vite + React Router app from{" "}
+            <code className="example-project__code">cafe-drink-app/apps/web</code>,
+            embedded below. The iframe uses{" "}
+            <strong>this page’s hostname</strong> and port{" "}
+            <code className="example-project__code">4000</code>. Start the app
+            with{" "}
+            <code className="example-project__code">
+              cd cafe-drink-app/apps/web && npm run dev
+            </code>
+            . Override the URL with{" "}
+            <code className="example-project__code">
+              REACT_APP_CAFE_DRINK_IFRAME_URL
+            </code>{" "}
+            in <code className="example-project__code">.env.local</code>.
+          </p>
+        ) : (
+          <p className="example-project__lede">
+            Full Vite + React Router app in{" "}
+            <code className="example-project__code">cafe-drink-app/apps/web</code>
+            . The live deployment opens in a new tab — most production hosts block
+            embedding in iframes from other sites (browser security).
+          </p>
+        )}
       </header>
 
       <section className="example-project__section example-project__section--flush">
         <h2 className="example-project__visually-hidden">Drink app</h2>
-        <div className="example-project__iframe-shell example-project__iframe-shell--full">
-          <iframe
-            className="example-project__iframe"
-            title="Cafe Drink App"
-            src={src}
-          />
-        </div>
+        {showIframe ? (
+          <div className="example-project__iframe-shell example-project__iframe-shell--full">
+            <iframe
+              className="example-project__iframe"
+              title="Cafe Drink App"
+              src={iframeSrc}
+            />
+          </div>
+        ) : (
+          <div className="example-project__embed-fallback">
+            <p className="example-project__embed-fallback-text">
+              Open the live app to browse recipes. Set{" "}
+              <code className="example-project__code">
+                REACT_APP_CAFE_DRINK_IFRAME_URL
+              </code>{" "}
+              when building if your host allows embedding, then add{" "}
+              <code className="example-project__code">
+                REACT_APP_CAFE_DRINK_USE_IFRAME=true
+              </code>{" "}
+              to try an iframe again.
+            </p>
+            <a
+              href={liveAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="example-project__embed-fallback-cta"
+            >
+              Open Cafe Drink App →
+            </a>
+          </div>
+        )}
       </section>
 
       <section className="example-project__section example-project__stack">
         <h2>Also on the web</h2>
         <p className="example-project__muted">
-          Open the hosted build on created.app in a new tab (same as production
-          embed when the portfolio is built).
+          Same URL as production when the portfolio is built (overridable via{" "}
+          <code className="example-project__code">
+            REACT_APP_CAFE_DRINK_IFRAME_URL
+          </code>
+          ).
         </p>
         <p className="example-project__iframe-note">
           <a
-            href={CAFE_DRINK_HOSTED_URL}
+            href={liveAppUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="example-project__back"
@@ -82,7 +120,7 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
       <section className="example-project__section example-project__stack">
         <h2>Tech stack</h2>
         <ul>
-          <li>Portfolio: React (Create React App), embedded via iframe</li>
+          <li>Portfolio: React (Create React App), embedded via iframe in dev</li>
           <li>
             Drink app: Vite + React Router in{" "}
             <code>cafe-drink-app/apps/web</code>

@@ -1,4 +1,8 @@
-/** Hosted production URL for cafe-drink-app (created.app). */
+/**
+ * Default production URL for cafe-drink-app (override with
+ * REACT_APP_CAFE_DRINK_IFRAME_URL at build time — required if this deployment
+ * is removed or changed).
+ */
 export const CAFE_DRINK_HOSTED_URL =
   "https://683fc7a9-93c6-4c45-b973-d7dcff546ded.created.app";
 

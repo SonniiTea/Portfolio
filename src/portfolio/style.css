@@ -1217,6 +1217,46 @@ a.project-card--link:focus-visible {
   font-size: 0.88rem;
 }
 
+.example-project__embed-fallback {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.example-project__embed-fallback-text {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.example-project__embed-fallback-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-family: "Nunito", "Inter", sans-serif;
+  text-decoration: none;
+  background: var(--btn-primary);
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(91, 134, 229, 0.35);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.example-project__embed-fallback-cta:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+}
+
 .example-project__footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
