@@ -1,0 +1,129 @@
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: 21px;
+  user-select: none;
+  fill: yellow;
+}
+
+.container .chevron-down {
+  position: absolute;
+  animation: keyframes-return .5s;
+}
+
+
+.container input:checked ~ .chevron-down {
+  animation: keyframes-rotate .5s;
+  transform: rotate(180deg);
+}
+
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+@keyframes keyframes-rotate {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes keyframes-return {
+  0% {
+    transform: rotate(-180deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.message {
+  margin: 0.4rem 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.user {
+  background: maroon;
+  color: white;
+  align-self: flex-end;
+  text-align: right;
+  font-weight: 600;
+}
+
+.bot {
+  background: darkcyan;
+  color: white;
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+  #chat-box {
+    flex: 1;
+    padding: 0.8rem;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  #chat-input {
+    border: none;
+    border-top: 1px solid #ccc;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    outline: none;
+    color: maroon;
+  }
+
+  #chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(120%); /* Hidden by default */
+    transition: transform .6s cubic-bezier(.77,0,.175,1);
+    z-index: 9999;
+  }
+  #chat-header {
+    background: linear-gradient(135deg, #ac7dd8, #e39bf1);
+    color: white;
+    padding: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+  }
+  #close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
