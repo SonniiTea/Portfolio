@@ -129,4 +129,31 @@ export const drinks = [
     time: "10 mins",
     difficulty: "Easy",
   },
+  {
+    id: "tiramisu-latte-mascarpone-foam",
+    name: "Tiramisu Latte with Mascarpone Cold Foam",
+    category: "Coffee & Tea",
+    description:
+      "Espresso sweetened and layered with Dutch espresso–milk foam, mascarpone cold foam, and a cocoa dusting — dessert in a cup.",
+    ingredients: [
+      "½ tbsp Dutch espresso powder",
+      "Cocoa powder for dusting",
+      "1 tbsp sugar",
+      "2 shots espresso",
+      "1 cup whole milk",
+      "Mascarpone cold foam (for topping — optional but recommended)",
+    ],
+    steps: [
+      "Brew 2 shots of espresso and pour them into your glass or cup.",
+      "Add 1 tbsp sugar to the espresso and stir until fully dissolved.",
+      "In a separate container, combine ½ tbsp Dutch espresso powder with a small splash of milk and mix until smooth.",
+      "Pour in 1 cup whole milk and froth or shake until light and slightly airy.",
+      "Gently layer or pour the milk mixture over the espresso.",
+      "(Optional but recommended) Add a thick layer of mascarpone cold foam on top.",
+      "Finish by lightly dusting cocoa powder over the foam.",
+    ],
+    image: "/images/tiramisu-latte-thumb.png",
+    time: "10 mins",
+    difficulty: "Easy",
+  },
 ];

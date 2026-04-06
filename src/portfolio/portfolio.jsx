@@ -4,9 +4,9 @@ import ThemeToggle from "../components/ThemeToggle";
 const PROJECTS = [
   {
     id: "example",
-    title: "Cafe-Style Drink Recipe App",
+    title: "Cloud Cup",
     description:
-      "Browse cafe-style drink recipes — full case study with link to the live app.",
+      "A café-style drink recipe app that blends front-end development techniques with a cozy, illustration-driven user experience.",
     to: "/cafe-drink",
     thumb: `${process.env.PUBLIC_URL || ""}/images/cafe-vibes-thumb.png`,
   },

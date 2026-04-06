@@ -1447,6 +1447,8 @@ a.project-card--link:focus-visible {
 
 /* ─── Cafe Drink App (integrated UI, src/cafe-drink/) ─── */
 .cafe-drink-app {
+  /* Recipe detail grid uses @container; width follows this panel (e.g. mobile preview frame) */
+  container-type: inline-size;
   border-radius: 16px;
   padding: clamp(1.25rem, 3vw, 2rem);
   background: linear-gradient(
@@ -1718,12 +1720,23 @@ a.project-card--link:focus-visible {
 .cafe-drink-app__detail-grid {
   display: grid;
   gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  min-width: 0;
 }
 
-@media (min-width: 768px) {
+/* Two columns only when the recipe panel is ≥768px (container), not the browser window */
+@container (min-width: 768px) {
   .cafe-drink-app__detail-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
+  }
+}
+
+/* Real phones: always stack even if a browser quirk mis-evaluates containers */
+@media screen and (max-width: 767px) {
+  .cafe-drink-app__detail-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
