@@ -594,6 +594,36 @@ a.project-card--link:focus-visible {
   color: #93a8ff;
 }
 
+.project-card__cta-arrow {
+  display: inline-block;
+}
+
+.project-card--link:hover .project-card__cta-arrow {
+  animation: project-card-cta-arrow-bounce-x 0.65s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card--link:hover .project-card__cta-arrow {
+    animation: none;
+  }
+}
+
+@keyframes project-card-cta-arrow-bounce-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-4px);
+  }
+}
+
 /* ─── Contact CTA button ─── */
 .contact {
   display: flex;
@@ -790,25 +820,9 @@ a.project-card--link:focus-visible {
   position: relative;
   z-index: 10;
 
-  background-image: linear-gradient(
-    90deg,
-    #adb8d6 0%,
-    hsla(0 0% 100% / var(--active, 0)) 120%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-
   font-size: 1rem;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-.app-root.dark-mode .contact-me-button .text_button {
-  background-image: linear-gradient(
-    90deg,
-    hsla(0 0% 100% / 1) 0%,
-    hsla(0 0% 100% / var(--active, 0)) 120%
-  );
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1525,6 +1539,7 @@ a.project-card--link:focus-visible {
 .sproutwise-app__inner {
   max-width: 72rem;
   margin: 0 auto;
+  min-width: 0;
 }
 
 .sproutwise-app__hero {
@@ -1594,16 +1609,18 @@ a.project-card--link:focus-visible {
   margin-bottom: 1.25rem;
 }
 
-@media (min-width: 640px) {
+/* Container width (not viewport) — matches portfolio mobile preview frame */
+@container (min-width: 900px) {
   .sproutwise-app__grid2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 .sproutwise-app__card {
+  min-width: 0;
   background: #fff;
   border-radius: 1rem;
-  padding: 1.25rem 1.35rem;
+  padding: clamp(0.9rem, 3vw, 1.35rem);
   box-shadow: 0 8px 28px rgba(47, 79, 47, 0.08);
   border: 1px solid rgba(156, 175, 136, 0.2);
 }
@@ -1619,10 +1636,16 @@ a.project-card--link:focus-visible {
 
 .sproutwise-app__card-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.65rem 1rem;
   margin-bottom: 1rem;
+}
+
+.sproutwise-app__card-head > div:first-child {
+  min-width: 0;
+  flex: 1 1 12rem;
 }
 
 .sproutwise-app__card-title {
@@ -1664,20 +1687,25 @@ a.project-card--link:focus-visible {
 }
 
 .sproutwise-app__temp {
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  flex-shrink: 0;
+  font-size: clamp(1.75rem, 8vw, 2.75rem);
   font-weight: 800;
   color: #c65d32;
   line-height: 1;
+  margin-left: auto;
 }
 
 .sproutwise-app__stats {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
   margin-top: 0.5rem;
 }
 
 .sproutwise-app__stat {
-  flex: 1;
+  flex: 1 1 4.5rem;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1690,9 +1718,10 @@ a.project-card--link:focus-visible {
 }
 
 .sproutwise-app__stat-val {
-  font-size: 0.92rem;
+  font-size: clamp(0.78rem, 2.8vw, 0.92rem);
   font-weight: 700;
   color: #6b7c59;
+  word-break: break-word;
 }
 
 .app-root.dark-mode .sproutwise-app__stat-val {
@@ -1700,17 +1729,16 @@ a.project-card--link:focus-visible {
 }
 
 .sproutwise-app__stat-label {
-  font-size: 0.72rem;
+  font-size: clamp(0.62rem, 2vw, 0.72rem);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #9caf88;
 }
 
+/* Garden row: use @container, not @media — portfolio “mobile” preview is ~390px wide while the viewport stays large. */
 .sproutwise-app__garden-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  min-width: 0;
 }
 
 .sproutwise-app__garden-count {
@@ -1721,14 +1749,54 @@ a.project-card--link:focus-visible {
 }
 
 .sproutwise-app__garden-icon {
-  width: 4.5rem;
-  height: 4.5rem;
+  flex-shrink: 0;
+  width: clamp(3.25rem, 12vw, 4.5rem);
+  height: clamp(3.25rem, 12vw, 4.5rem);
   border-radius: 999px;
   background: #f5e6d3;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: clamp(1.35rem, 5vw, 2rem);
+}
+
+@container (max-width: 639px) {
+  .sproutwise-app__card--garden {
+    display: flex;
+    flex-direction: column;
+    min-height: 11rem;
+  }
+
+  .sproutwise-app__garden-row {
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .sproutwise-app__garden-icon {
+    align-self: center;
+    margin-top: auto;
+  }
+}
+
+@container (min-width: 640px) {
+  .sproutwise-app__card--garden {
+    display: block;
+    min-height: 0;
+  }
+
+  .sproutwise-app__garden-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .sproutwise-app__garden-icon {
+    align-self: auto;
+    margin-top: 0;
+  }
 }
 
 .app-root.dark-mode .sproutwise-app__garden-icon {
@@ -1756,7 +1824,7 @@ a.project-card--link:focus-visible {
   color: #6b7c59;
 }
 
-@media (min-width: 480px) {
+@container (min-width: 640px) {
   .sproutwise-app__dl {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1793,6 +1861,7 @@ a.project-card--link:focus-visible {
 
 .sproutwise-app__dl dd {
   margin: 0.15rem 0 0;
+  overflow-wrap: anywhere;
 }
 
 .sproutwise-app__tags {
@@ -1842,11 +1911,18 @@ a.project-card--link:focus-visible {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
+@container (min-width: 520px) {
+  .sproutwise-app__plant-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  }
+}
+
 .sproutwise-app__plant-card {
+  min-width: 0;
   background: #fff;
   border-radius: 1rem;
   padding: 1rem 1.1rem;
@@ -1928,7 +2004,7 @@ a.project-card--link:focus-visible {
   gap: 0.75rem;
 }
 
-@media (min-width: 480px) {
+@container (min-width: 480px) {
   .sproutwise-app__actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-w-0 overflow-x-hidden">
         {/* Mascot Greeting */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
@@ -49,21 +49,21 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 min-w-0">
           {/* Weather Widget */}
           {weather && (
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-[#2F4F2F] mb-1">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg min-w-0">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-lg sm:text-xl font-semibold text-[#2F4F2F] mb-1 break-words">
                     {weather.location?.name}
                   </h2>
                   <p className="text-sm text-[#9CAF88]">
                     {weather.current?.condition?.text}
                   </p>
                 </div>
-                <div className="text-right">
-                  <p className="text-5xl font-bold text-[#C65D32]">
+                <div className="text-left sm:text-right shrink-0">
+                  <p className="text-4xl sm:text-5xl font-bold text-[#C65D32] tabular-nums">
                     {Math.round(weather.current?.temp_f)}°
                   </p>
                   <p className="text-sm text-[#6B7C59]">
@@ -72,22 +72,22 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex gap-4 mt-4">
-                <div className="flex-1 flex flex-col items-center">
-                  <Droplets size={24} className="text-[#9CAF88] mb-2" />
-                  <p className="text-sm text-[#6B7C59]">
+              <div className="flex flex-wrap justify-between gap-3 sm:gap-4 mt-4">
+                <div className="flex min-w-[4.5rem] flex-1 flex-col items-center">
+                  <Droplets size={24} className="text-[#9CAF88] mb-2 shrink-0" />
+                  <p className="text-xs sm:text-sm text-[#6B7C59] text-center">
                     {weather.current?.humidity}%
                   </p>
                 </div>
-                <div className="flex-1 flex flex-col items-center">
-                  <Sun size={24} className="text-[#C65D32] mb-2" />
-                  <p className="text-sm text-[#6B7C59]">
+                <div className="flex min-w-[4.5rem] flex-1 flex-col items-center">
+                  <Sun size={24} className="text-[#C65D32] mb-2 shrink-0" />
+                  <p className="text-xs sm:text-sm text-[#6B7C59] text-center">
                     UV {weather.current?.uv}
                   </p>
                 </div>
-                <div className="flex-1 flex flex-col items-center">
-                  <Cloud size={24} className="text-[#9CAF88] mb-2" />
-                  <p className="text-sm text-[#6B7C59]">
+                <div className="flex min-w-[4.5rem] flex-1 flex-col items-center">
+                  <Cloud size={24} className="text-[#9CAF88] mb-2 shrink-0" />
+                  <p className="text-xs sm:text-sm text-[#6B7C59] text-center">
                     {weather.current?.wind_mph} mph
                   </p>
                 </div>
@@ -96,19 +96,19 @@ export default function Home() {
           )}
 
           {/* Garden Summary */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
-            <h2 className="text-xl font-bold text-[#2F4F2F] mb-4">
+          <div className="sw-home-garden-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-[#2F4F2F] mb-4">
               Your Garden
             </h2>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-5xl font-bold text-[#C65D32] mb-1">
+            <div className="sw-home-garden-row">
+              <div className="min-w-0">
+                <p className="text-4xl sm:text-5xl font-bold text-[#C65D32] mb-1 tabular-nums">
                   {gardenCount}
                 </p>
                 <p className="text-sm text-[#6B7C59]">Plants Growing</p>
               </div>
-              <div className="bg-[#F5E6D3] rounded-full w-20 h-20 flex items-center justify-center">
-                <Sprout size={40} className="text-[#9CAF88]" />
+              <div className="sw-home-garden-icon-wrap bg-[#F5E6D3] rounded-full w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shrink-0">
+                <Sprout className="h-8 w-8 sm:h-10 sm:w-10 text-[#9CAF88]" strokeWidth={1.75} />
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-[#2F4F2F] mb-4">
             What to plant now
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 min-[520px]:grid-cols-2 xl:grid-cols-3 gap-4">
             {PLANTS.map((p) => (
               <div
                 key={p.name}
@@ -184,14 +184,20 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-[#2F4F2F] mb-4">
             Quick Actions
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <button className="bg-[#9CAF88] hover:bg-[#8A9F78] text-white rounded-xl p-6 flex items-center justify-center gap-3 transition-colors">
-              <Sprout size={32} />
-              <span className="text-lg font-semibold">Add Plant</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <button
+              type="button"
+              className="bg-[#9CAF88] hover:bg-[#8A9F78] text-white rounded-xl p-4 sm:p-6 flex items-center justify-center gap-3 transition-colors min-w-0"
+            >
+              <Sprout className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" strokeWidth={1.75} />
+              <span className="text-base sm:text-lg font-semibold">Add Plant</span>
             </button>
-            <button className="bg-[#C65D32] hover:bg-[#B54D22] text-white rounded-xl p-6 flex items-center justify-center gap-3 transition-colors">
-              <Droplets size={32} />
-              <span className="text-lg font-semibold">Water Log</span>
+            <button
+              type="button"
+              className="bg-[#C65D32] hover:bg-[#B54D22] text-white rounded-xl p-4 sm:p-6 flex items-center justify-center gap-3 transition-colors min-w-0"
+            >
+              <Droplets className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" strokeWidth={1.75} />
+              <span className="text-base sm:text-lg font-semibold">Water Log</span>
             </button>
           </div>
         </div>

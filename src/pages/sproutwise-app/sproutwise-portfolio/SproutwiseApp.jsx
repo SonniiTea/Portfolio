@@ -96,7 +96,7 @@ export default function SproutwiseApp() {
             </div>
           </div>
 
-          <div className="sproutwise-app__card">
+          <div className="sproutwise-app__card sproutwise-app__card--garden">
             <h2 className="sproutwise-app__card-heading">Your Garden</h2>
             <div className="sproutwise-app__garden-row">
               <div>

@@ -2,6 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* Container queries: portfolio preview & narrow panes are not the viewport width */
+  .sw-home-garden-card {
+    container-type: inline-size;
+    min-width: 0;
+  }
+
+  .sw-home-garden-row {
+    display: flex;
+    min-width: 0;
+  }
+
+  @container (max-width: 639px) {
+    .sw-home-garden-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 11rem;
+    }
+
+    .sw-home-garden-row {
+      flex: 1;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .sw-home-garden-icon-wrap {
+      align-self: center;
+      margin-top: auto;
+    }
+  }
+
+  @container (min-width: 640px) {
+    .sw-home-garden-card {
+      display: block;
+      min-height: 0;
+    }
+
+    .sw-home-garden-row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .sw-home-garden-icon-wrap {
+      margin-top: 0;
+      align-self: auto;
+    }
+  }
+}
+
 @layer base {
   input, textarea, select, button {
     @apply outline-none focus:outline-none;

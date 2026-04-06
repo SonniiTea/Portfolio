@@ -14,7 +14,7 @@ const PROJECTS = [
     id: "2",
     title: "Sproutwise",
     description:
-      "Personal garden guide — zone-aware weather, soil, watering, and crop tips.",
+      "A personal garden planning app that leverages location-based data, dynamic weather integration, and structured plant care logic.",
     to: "/sproutwise-app",
     thumb: `${process.env.PUBLIC_URL || ""}/images/sproutwise-thumb.png`,
   },
@@ -137,7 +137,12 @@ export default function Portfolio({ darkMode, setDarkMode }) {
                 <h3 className="project-card-title">{p.title}</h3>
                 <p>{p.description}</p>
                 {p.to ? (
-                  <span className="project-card__cta">View project →</span>
+                  <span className="project-card__cta">
+                    View project{" "}
+                    <span className="project-card__cta-arrow" aria-hidden>
+                      →
+                    </span>
+                  </span>
                 ) : null}
               </div>
             </>
