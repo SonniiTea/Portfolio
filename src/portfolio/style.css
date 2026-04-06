@@ -1445,6 +1445,80 @@ a.project-card--link:focus-visible {
   box-shadow: none;
 }
 
+/* Full-width layout for /sproutwise-app (Vite app via iframe; dev server port 4001) */
+.sproutwise-page {
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.sproutwise-page .project-viewport {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  width: 100%;
+  padding: 0 clamp(0.75rem, 2vw, 1rem) 1rem;
+  box-sizing: border-box;
+}
+
+.sproutwise-page__top {
+  position: relative;
+  flex-shrink: 0;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem) 0.5rem;
+}
+
+.sproutwise-page__top .theme-toggle-wrap {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1rem);
+  right: clamp(1rem, 3vw, 1.5rem);
+}
+
+.sproutwise-page__nav {
+  margin: 0;
+  padding-right: 5.5rem;
+}
+
+/* Let the preview frame size the iframe (avoids collapsed / zero-height embeds). */
+.sproutwise-page .project-viewport__frame {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: min(88vh, 920px);
+  width: 100%;
+}
+
+.sproutwise-page__iframe {
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: block;
+  width: 100%;
+  min-height: min(80vh, 860px);
+  border: none;
+  background: #f5e6d3;
+}
+
+.app-root.dark-mode .sproutwise-page__iframe {
+  background: #1a1a22;
+}
+
+.sproutwise-page__fallback {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.sproutwise-page__fallback-path {
+  margin-top: 1rem;
+}
+
 /* ─── Cafe Drink App (integrated UI, src/cafe-drink/) ─── */
 .cafe-drink-app {
   /* Recipe detail grid uses @container; width follows this panel (e.g. mobile preview frame) */
