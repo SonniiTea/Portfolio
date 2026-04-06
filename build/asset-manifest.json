@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.be7638f8.css",
+    "main.css": "/Portfolio/static/css/main.e0abb8ff.css",
     "main.js": "/Portfolio/static/js/main.817e74d7.js",
     "static/media/sproutwise-mascot.png": "/Portfolio/static/media/sproutwise-mascot.fead707067da23953ce6.png",
     "static/media/sproutwise-hero-hover-laugh.png": "/Portfolio/static/media/sproutwise-hero-hover-laugh.4526730604ae93fe1ef6.png",
     "index.html": "/Portfolio/index.html",
-    "main.be7638f8.css.map": "/Portfolio/static/css/main.be7638f8.css.map",
+    "main.e0abb8ff.css.map": "/Portfolio/static/css/main.e0abb8ff.css.map",
     "main.817e74d7.js.map": "/Portfolio/static/js/main.817e74d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.be7638f8.css",
+    "static/css/main.e0abb8ff.css",
     "static/js/main.817e74d7.js"
   ]
 }
