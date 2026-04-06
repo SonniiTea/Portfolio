@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./portfolio/style.css";
 import Portfolio from "./portfolio/portfolio";
 import ExampleProject from "./pages/ExampleProject";
+import CafeDrinkPage from "./pages/CafeDrinkPage";
 
-/** Must match package.json "homepage" path for GitHub Pages */
-const basename = "/Portfolio";
+/** Matches CRA’s injected PUBLIC_URL (see `.env.development` for local root vs GitHub Pages build). */
+const basename = (process.env.PUBLIC_URL || "").replace(/\/$/, "");
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -35,6 +36,15 @@ export default function App() {
             path="/projects/example"
             element={
               <ExampleProject
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
+              />
+            }
+          />
+          <Route
+            path="/cafe-drink"
+            element={
+              <CafeDrinkPage
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
               />

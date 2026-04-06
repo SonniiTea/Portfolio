@@ -15,7 +15,7 @@ function useIframeEmbed() {
 }
 
 /**
- * Case-study page: embeds the full Cafe Drink web app (cafe-drink-app/apps/web)
+ * Case-study page: embeds the full Cafe Drink web app (src/pages/cafe-drink-app/apps/web)
  * in an iframe in development. Production uses a prominent link — typical hosts
  * (e.g. Vercel) send frame-ancestors 'none', so the embed stays blank on GitHub Pages.
  */
@@ -37,13 +37,15 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
         {process.env.NODE_ENV === "development" ? (
           <p className="example-project__lede">
             Full Vite + React Router app from{" "}
-            <code className="example-project__code">cafe-drink-app/apps/web</code>,
-            embedded below. The iframe uses{" "}
+            <code className="example-project__code">
+              src/pages/cafe-drink-app/apps/web
+            </code>{" "}
+            — embedded below. The iframe uses{" "}
             <strong>this page’s hostname</strong> and port{" "}
             <code className="example-project__code">4000</code>. Start the app
             with{" "}
             <code className="example-project__code">
-              cd cafe-drink-app/apps/web && npm run dev
+              cd src/pages/cafe-drink-app/apps/web && npm run dev
             </code>
             . Override the URL with{" "}
             <code className="example-project__code">
@@ -54,7 +56,9 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
         ) : (
           <p className="example-project__lede">
             Full Vite + React Router app in{" "}
-            <code className="example-project__code">cafe-drink-app/apps/web</code>
+            <code className="example-project__code">
+              src/pages/cafe-drink-app/apps/web
+            </code>
             . The live deployment opens in a new tab — most production hosts block
             embedding in iframes from other sites (browser security).
           </p>
@@ -123,11 +127,12 @@ export default function ExampleProject({ darkMode, setDarkMode }) {
           <li>Portfolio: React (Create React App), embedded via iframe in dev</li>
           <li>
             Drink app: Vite + React Router in{" "}
-            <code>cafe-drink-app/apps/web</code>
+            <code>src/pages/cafe-drink-app/apps/web</code>
           </li>
           <li>
             Lightweight in-repo UI (no iframe) still lives in{" "}
-            <code>src/cafe-drink/</code> if you want to reuse it elsewhere
+            <code>src/pages/cafe-drink-app/cafe-drink/</code> if you want to
+            reuse it elsewhere
           </li>
         </ul>
       </section>

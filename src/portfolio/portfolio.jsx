@@ -7,7 +7,7 @@ const PROJECTS = [
     title: "Cafe-Style Drink Recipe App",
     description:
       "Browse cafe-style drink recipes — full case study with link to the live app.",
-    to: "/projects/example",
+    to: "/cafe-drink",
     thumb: `${process.env.PUBLIC_URL || ""}/images/cafe-vibes-thumb.png`,
   },
   {
