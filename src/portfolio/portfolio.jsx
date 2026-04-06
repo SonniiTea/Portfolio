@@ -12,10 +12,11 @@ const PROJECTS = [
   },
   {
     id: "2",
-    title: "Project title",
-    description: "Short description of the project. Tech stack used.",
+    title: "Sproutwise",
+    description:
+      "Personal garden guide — zone-aware weather, soil, watering, and crop tips.",
     to: null,
-    thumb: "https://via.placeholder.com/400x160",
+    thumb: `${process.env.PUBLIC_URL || ""}/images/sproutwise-thumb.png`,
   },
   {
     id: "3",

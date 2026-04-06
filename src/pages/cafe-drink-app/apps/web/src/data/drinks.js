@@ -5,8 +5,7 @@ export const drinks = [
     category: "Coffee & Tea",
     description:
       "Ceremonial grade matcha whisked with oat milk and topped with a thick layer of vanilla cold foam.",
-    image:
-      "https://raw.createusercontent.com/1beb4b21-968e-4e13-a180-fc28d45c89bc/",
+    image: "/images/matcha-cloud-latte-thumb.png",
     ingredients: [
       "1 tsp Ceremonial grade matcha",
       "2 oz hot water (175°F)",
@@ -31,8 +30,7 @@ export const drinks = [
     category: "Coffee & Tea",
     description:
       "Slow-steeped cold brew coffee infused with real vanilla bean and finished with a splash of cream.",
-    image:
-      "https://raw.createusercontent.com/088f8708-f504-4671-9efe-62baab62c2cb/",
+    image: "/images/vanilla-bean-cold-brew-thumb.png",
     ingredients: [
       "8 oz Cold brew concentrate",
       "1/2 Vanilla bean pod (scraped)",
@@ -55,8 +53,7 @@ export const drinks = [
     category: "Coffee & Tea",
     description:
       "A soothing Earl Grey tea latte with a hint of floral lavender and steamed milk.",
-    image:
-      "https://raw.createusercontent.com/c2cdbfb3-60d3-47e7-a34a-ba3807d3f70f/",
+    image: "/images/lavender-earl-grey-thumb.png",
     ingredients: [
       "1 Earl Grey tea bag",
       "4 oz boiling water",
@@ -80,8 +77,7 @@ export const drinks = [
     category: "Refreshers",
     description:
       "Bright hibiscus tea mixed with sparkling water, fresh mint, and a squeeze of lime.",
-    image:
-      "https://raw.createusercontent.com/74a60579-4108-44c5-bf57-fba5e028931b/",
+    image: "/images/hibiscus-fizzy-thumb.png",
     ingredients: [
       "4 oz Hibiscus tea (chilled)",
       "4 oz Sparkling water",
@@ -98,6 +94,39 @@ export const drinks = [
       "Garnish with a lime wheel and mint sprig.",
     ],
     time: "4 mins",
+    difficulty: "Easy",
+  },
+  {
+    id: "cherry-blossom-matcha-latte",
+    name: "Cherry Blossom Matcha Latte",
+    category: "Seasonal",
+    description:
+      "A spring sakura matcha latte with vanilla matcha, cherry blossom syrup, and milk — homemade beats the limited-edition Frappuccino.",
+    introParagraphs: [
+      "Sakura (cherry blossom) has become a popular seasonal flavor, often found in cookies, ice cream, cakes, and drinks. Even Starbucks releases a limited-edition Sakura Frappuccino each spring. However, this homemade sakura matcha latte is infinitely tastier (not that we're biased).",
+      "You'll need cherry blossom syrup for this recipe, which you can find online or in specialty stores. When buying, look for syrups made with real cherry blossoms rather than artificial flavors for the most authentic and rich flavor.",
+    ],
+    syrupRecipe: {
+      title: "Homemade cherry blossom syrup",
+      steps: [
+        "Simmer 1 cup of fresh cherry blossoms, 1 cup sugar, and 1 cup of water in a saucepan over low heat.",
+        "Stir until sugar fully dissolves, then let mixture steep for 10–15 minutes.",
+        "Strain out the blossoms and let cool. Store in a sealed jar in the refrigerator.",
+      ],
+    },
+    ingredients: [
+      "1 tsp vanilla matcha powder",
+      "¼ cup warm water",
+      "3 tablespoons cherry blossom syrup",
+      "⅔ cup milk",
+      "Ice",
+    ],
+    steps: [
+      "Make your vanilla matcha: Sift 1 tsp vanilla matcha powder into a matcha bowl and add warm water. Using a bamboo whisk (chasen), whisk in a zig-zag motion until frothy.",
+      "In a glass, add ice and cherry blossom syrup, then milk. Top with vanilla matcha.",
+    ],
+    image: "/images/sakura-matcha-thumb.png",
+    time: "10 mins",
     difficulty: "Easy",
   },
 ];

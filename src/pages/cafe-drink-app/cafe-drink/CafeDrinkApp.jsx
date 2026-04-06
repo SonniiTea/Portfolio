@@ -1,7 +1,35 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { drinks } from "./data/drinks";
 
-const CATEGORIES = ["All", "Coffee & Tea", "Refreshers"];
+const CATEGORIES = ["All", "Coffee & Tea", "Refreshers", "Seasonal"];
+
+function RecipeCheckRow({ rowId, text, checked, onToggle }) {
+  return (
+    <label className="cafe-drink-app__check-row">
+      <span className="cafe-drink-app__check-hit">
+        <input
+          type="checkbox"
+          className="cafe-drink-app__check-input"
+          checked={checked}
+          onChange={() => onToggle(rowId)}
+        />
+        <span className="cafe-drink-app__check-box" aria-hidden="true">
+          <svg className="cafe-drink-app__check-icon" viewBox="0 0 16 16" fill="none">
+            <path
+              className="cafe-drink-app__check-path"
+              d="M3 8.5l3 3 7-7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </span>
+      <span className="cafe-drink-app__check-text">{text}</span>
+    </label>
+  );
+}
 
 /**
  * In-portfolio version of the Cafe Drink App — uses the same recipe data as
@@ -11,6 +39,20 @@ export default function CafeDrinkApp() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [selectedId, setSelectedId] = useState(null);
+  const [checkedRows, setCheckedRows] = useState(() => new Set());
+
+  const toggleRow = useCallback((rowId) => {
+    setCheckedRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(rowId)) next.delete(rowId);
+      else next.add(rowId);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    setCheckedRows(new Set());
+  }, [selectedId]);
 
   const filtered = useMemo(() => {
     return drinks.filter((d) => {
@@ -19,7 +61,8 @@ export default function CafeDrinkApp() {
       const matchSearch =
         !q ||
         d.name.toLowerCase().includes(q) ||
-        d.category.toLowerCase().includes(q);
+        d.category.toLowerCase().includes(q) ||
+        d.description.toLowerCase().includes(q);
       return matchCat && matchSearch;
     });
   }, [search, category]);
@@ -45,25 +88,88 @@ export default function CafeDrinkApp() {
               <img src={selected.image} alt={selected.name} />
               <span className="cafe-drink-app__badge">{selected.category}</span>
             </div>
-            <div>
-              <h3 className="cafe-drink-app__detail-title">{selected.name}</h3>
-              <p className="cafe-drink-app__detail-desc">{selected.description}</p>
-              <div className="cafe-drink-app__meta">
-                <span>⏱ {selected.time}</span>
-                <span>☕ {selected.difficulty}</span>
+            <div className="cafe-drink-app__detail-body">
+              <div className="cafe-drink-app__recipe-section cafe-drink-app__recipe-section--intro">
+                <h3 className="cafe-drink-app__detail-title">{selected.name}</h3>
+                {selected.introParagraphs?.length ? (
+                  selected.introParagraphs.map((para, i) => (
+                    <p key={i} className="cafe-drink-app__detail-desc">
+                      {para}
+                    </p>
+                  ))
+                ) : (
+                  <p className="cafe-drink-app__detail-desc">
+                    {selected.description}
+                  </p>
+                )}
+                <div className="cafe-drink-app__meta">
+                  <span>⏱ {selected.time}</span>
+                  <span>☕ {selected.difficulty}</span>
+                </div>
               </div>
-              <h4 className="cafe-drink-app__subhead">Ingredients</h4>
-              <ul className="cafe-drink-app__list">
-                {selected.ingredients.map((line, i) => (
-                  <li key={i}>{line}</li>
-                ))}
-              </ul>
-              <h4 className="cafe-drink-app__subhead">Steps</h4>
-              <ol className="cafe-drink-app__steps">
-                {selected.steps.map((line, i) => (
-                  <li key={i}>{line}</li>
-                ))}
-              </ol>
+
+              {selected.syrupRecipe ? (
+                <div className="cafe-drink-app__recipe-section">
+                  <h4 className="cafe-drink-app__subhead">
+                    {selected.syrupRecipe.title}
+                  </h4>
+                  <ol className="cafe-drink-app__check-list">
+                    {selected.syrupRecipe.steps.map((line, i) => {
+                      const rowId = `syrup-${i}`;
+                      return (
+                        <li key={rowId}>
+                          <RecipeCheckRow
+                            rowId={rowId}
+                            text={line}
+                            checked={checkedRows.has(rowId)}
+                            onToggle={toggleRow}
+                          />
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+              ) : null}
+
+              <div className="cafe-drink-app__recipe-section">
+                <h4 className="cafe-drink-app__subhead">Ingredients</h4>
+                <ul className="cafe-drink-app__check-list cafe-drink-app__check-list--unordered">
+                  {selected.ingredients.map((line, i) => {
+                    const rowId = `ing-${i}`;
+                    return (
+                      <li key={rowId}>
+                        <RecipeCheckRow
+                          rowId={rowId}
+                          text={line}
+                          checked={checkedRows.has(rowId)}
+                          onToggle={toggleRow}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              <div className="cafe-drink-app__recipe-section">
+                <h4 className="cafe-drink-app__subhead">
+                  {selected.syrupRecipe ? "Directions" : "Steps"}
+                </h4>
+                <ol className="cafe-drink-app__check-list">
+                  {selected.steps.map((line, i) => {
+                    const rowId = `step-${i}`;
+                    return (
+                      <li key={rowId}>
+                        <RecipeCheckRow
+                          rowId={rowId}
+                          text={line}
+                          checked={checkedRows.has(rowId)}
+                          onToggle={toggleRow}
+                        />
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
             </div>
           </div>
         </div>

@@ -85,9 +85,20 @@ export default function DrinkDetailPage({ params }) {
               <h1 className="text-4xl md:text-5xl font-fredoka font-bold text-[#2D3748] mb-4 leading-tight">
                 {drink.name}
               </h1>
-              <p className="text-lg text-[#4A5568] leading-relaxed mb-6 font-medium">
-                {drink.description}
-              </p>
+              {drink.introParagraphs?.length ? (
+                drink.introParagraphs.map((para, i) => (
+                  <p
+                    key={i}
+                    className="text-lg text-[#4A5568] leading-relaxed mb-4 last:mb-6 font-medium"
+                  >
+                    {para}
+                  </p>
+                ))
+              ) : (
+                <p className="text-lg text-[#4A5568] leading-relaxed mb-6 font-medium">
+                  {drink.description}
+                </p>
+              )}
               <div className="flex gap-4">
                 <div className="flex items-center gap-2 bg-[#FFF4E0] px-4 py-3 rounded-full">
                   <Clock className="w-5 h-5 text-[#FFB347]" />
@@ -112,6 +123,24 @@ export default function DrinkDetailPage({ params }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
+            {drink.syrupRecipe ? (
+              <section className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="bg-gradient-to-r from-[#F687B3] to-[#9F7AEA] rounded-full p-2">
+                    <Sparkles className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-fredoka font-bold text-[#2D3748]">
+                    {drink.syrupRecipe.title}
+                  </h3>
+                </div>
+                <ol className="list-decimal list-inside space-y-3 text-[#2D3748] font-medium">
+                  {drink.syrupRecipe.steps.map((s, idx) => (
+                    <li key={idx}>{s}</li>
+                  ))}
+                </ol>
+              </section>
+            ) : null}
+
             {/* Ingredients */}
             <section className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
               <div className="flex items-center gap-3 mb-6">
@@ -149,7 +178,7 @@ export default function DrinkDetailPage({ params }) {
                   <Coffee className="w-5 h-5 text-white" />
                 </div>
                 <h3 className="text-2xl font-fredoka font-bold text-[#2D3748]">
-                  Let's Make It!
+                  {drink.syrupRecipe ? "Directions" : "Let's Make It!"}
                 </h3>
               </div>
               <div className="space-y-6">
