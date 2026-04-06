@@ -4,7 +4,7 @@ import "./portfolio/style.css";
 import Portfolio from "./portfolio/portfolio";
 import ExampleProject from "./pages/ExampleProject";
 import CafeDrinkPage from "./pages/CafeDrinkPage";
-import SproutwisePage from "./pages/SproutwisePage";
+import SproutwisePage from "./pages/SproutwisePage.jsx";
 
 /** Matches CRA’s injected PUBLIC_URL (see `.env.development` for local root vs GitHub Pages build). */
 const basename = (process.env.PUBLIC_URL || "").replace(/\/$/, "");

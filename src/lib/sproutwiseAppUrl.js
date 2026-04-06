@@ -1,11 +1,11 @@
 /**
- * Sproutwise web app URL for the portfolio iframe (`src/pages/sproutwise-app/apps/web`, dev port 4001).
+ * Sproutwise web app URL for the portfolio iframe (`src/pages/sproutwise-app/apps/web`, dev port 4000 — see `vite.config.ts`).
  *
  * Override at build time with `REACT_APP_SPROUTWISE_IFRAME_URL` when the app is deployed.
  */
 export const SPROUTWISE_HOSTED_URL = "";
 
-const DEV_PORT = 4001;
+const DEV_PORT = 4000;
 
 /** Base URL for the Sproutwise web app (no trailing slash). */
 export function getSproutwiseAppBaseUrl() {
