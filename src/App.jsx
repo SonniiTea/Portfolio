@@ -4,6 +4,7 @@ import "./portfolio/style.css";
 import Portfolio from "./portfolio/portfolio";
 import ExampleProject from "./pages/ExampleProject";
 import CafeDrinkPage from "./pages/CafeDrinkPage";
+import SproutwisePage from "./pages/SproutwisePage";
 
 /** Matches CRA’s injected PUBLIC_URL (see `.env.development` for local root vs GitHub Pages build). */
 const basename = (process.env.PUBLIC_URL || "").replace(/\/$/, "");
@@ -45,6 +46,15 @@ export default function App() {
             path="/cafe-drink"
             element={
               <CafeDrinkPage
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
+              />
+            }
+          />
+          <Route
+            path="/sproutwise-app"
+            element={
+              <SproutwisePage
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
               />

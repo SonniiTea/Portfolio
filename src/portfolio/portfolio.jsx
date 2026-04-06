@@ -15,7 +15,7 @@ const PROJECTS = [
     title: "Sproutwise",
     description:
       "Personal garden guide — zone-aware weather, soil, watering, and crop tips.",
-    to: null,
+    to: "/sproutwise-app",
     thumb: `${process.env.PUBLIC_URL || ""}/images/sproutwise-thumb.png`,
   },
   {
