@@ -20,10 +20,10 @@ const PROJECTS = [
   },
   {
     id: "3",
-    title: "Project title",
+    title: "Project Coming Soon",
     description: "Short description of the project. Tech stack used.",
     to: null,
-    thumb: "https://via.placeholder.com/400x160",
+    thumb: `${process.env.PUBLIC_URL || ""}/images/coming-soon-thumb.png`,
   },
 ];
 
